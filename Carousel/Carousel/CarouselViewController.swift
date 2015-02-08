@@ -25,6 +25,7 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
         super.viewDidLoad()
 
         carousel.type = .Wheel
+        carousel.decelerationRate = 0.8
     }
 
     func numberOfItemsInCarousel(carousel: iCarousel!) -> Int {
