@@ -25,7 +25,7 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
         super.viewDidLoad()
 
         carousel.type = .Wheel
-        carousel.decelerationRate = 0.8
+        carousel.decelerationRate = 0.4
     }
 
     // MARK: - Private
@@ -131,8 +131,6 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
 
     func carousel(carousel: iCarousel!, valueForOption option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
         switch option {
-        case .Wrap:
-            return 0
         case .Spacing:
             return value * 0.85
         case .Arc:
