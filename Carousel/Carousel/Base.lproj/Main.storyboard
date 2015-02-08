@@ -1,26 +1,104 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6750" systemVersion="14D72i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6750" systemVersion="14D72i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="3lh-Yp-Yc7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6735"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <!--Carousels-->
+        <scene sceneID="5Ss-gK-wLg">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Carousel" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                <tableViewController id="mcZ-ew-nau" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ycp-av-Mb2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="NsG-yQ-sfc">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="FA2-NC-GLv" style="IBUITableViewCellStyleDefault" id="KrR-pc-mM4">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KrR-pc-mM4" id="mog-qf-Jv9">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="1. iCarousel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FA2-NC-GLv">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="UeE-tg-wAy" kind="push" id="Zb4-Bh-asr"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="mcZ-ew-nau" id="CnP-Rc-q0o"/>
+                            <outlet property="delegate" destination="mcZ-ew-nau" id="Ju1-wg-bDc"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Carousels" id="YB4-nM-hCq"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ohm-ix-bJT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="162.66666666666666" y="348.37333333333333"/>
+            <point key="canvasLocation" x="253" y="174"/>
+        </scene>
+        <!--1. iCarousel-->
+        <scene sceneID="hvl-es-aQg">
+            <objects>
+                <viewController id="UeE-tg-wAy" customClass="CarouselViewController" customModule="Carousel" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mhA-iH-hJu"/>
+                        <viewControllerLayoutGuide type="bottom" id="Waa-Li-9ck"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="if2-vV-VNY">
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ypg-kq-S0f" customClass="iCarousel">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="UeE-tg-wAy" id="8cn-AP-hFD"/>
+                                    <outlet property="delegate" destination="UeE-tg-wAy" id="iFI-kM-mo8"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ypg-kq-S0f" firstAttribute="leading" secondItem="if2-vV-VNY" secondAttribute="leading" id="HV2-fj-mcH"/>
+                            <constraint firstItem="ypg-kq-S0f" firstAttribute="top" secondItem="if2-vV-VNY" secondAttribute="top" id="JY0-IW-jWf"/>
+                            <constraint firstAttribute="trailing" secondItem="ypg-kq-S0f" secondAttribute="trailing" id="imf-X8-96i"/>
+                            <constraint firstItem="Waa-Li-9ck" firstAttribute="top" secondItem="ypg-kq-S0f" secondAttribute="bottom" id="tDq-3y-azS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="1. iCarousel" id="J7U-aw-nmC"/>
+                    <connections>
+                        <outlet property="carousel" destination="ypg-kq-S0f" id="oIE-k3-re8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lyb-8F-y1i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="751" y="174"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cSP-w7-1go">
+            <objects>
+                <navigationController id="3lh-Yp-Yc7" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iFQ-pJ-dkc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="mcZ-ew-nau" kind="relationship" relationship="rootViewController" id="6Hl-sM-u2I"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jNX-Xs-T84" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-287" y="174"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
