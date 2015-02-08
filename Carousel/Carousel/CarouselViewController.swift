@@ -99,6 +99,13 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
 
     // MARK: - iCarouselDelegate
 
+    func carousel(carousel: iCarousel!, didSelectItemAtIndex index: Int) {
+        let isAnotherItemSelected = index != carousel.currentItemIndex
+        if isAnotherItemSelected {
+            collapseVisibleItemViews()
+        }
+    }
+
     func carouselCurrentItemIndexDidChange(carousel: iCarousel!) {
         collapseVisibleItemViews()
         expandCenterItemView()
@@ -115,6 +122,10 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
     }
 
     func carouselDidEndDecelerating(carousel: iCarousel!) {
+        expandCurrentItemView()
+    }
+
+    func carouselDidEndScrollingAnimation(carousel: iCarousel!) {
         expandCurrentItemView()
     }
 
