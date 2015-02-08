@@ -16,7 +16,7 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        for i in 1...10 {
+        for i in 0...9 {
             items.append(i)
         }
     }
@@ -27,6 +27,27 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
         carousel.type = .Wheel
         carousel.decelerationRate = 0.8
     }
+
+    // MARK: - Private
+
+    private func expandCurrentItemView() {
+        let currentItemView = carousel.currentItemView
+
+        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
+            let transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1)
+            currentItemView.transform = CGAffineTransformTranslate(transform, 0, -20)
+        }, completion: nil)
+    }
+
+    private func collapseCurrentItemView() {
+        let currentItemView = carousel.currentItemView
+
+        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
+            currentItemView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9)
+        }, completion: nil)
+    }
+
+    // MARK: - iCarouselDataSource
 
     func numberOfItemsInCarousel(carousel: iCarousel!) -> Int {
         return items.count
@@ -41,6 +62,7 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
             //this `if (view == nil) {...}` statement because the view will be
             //recycled and used with other index values later
             view = UIView(frame:CGRectMake(0, 0, 180, 240))
+            view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9)
             view.contentMode = .Center
             view.backgroundColor = UIColor.lightGrayColor()
             view.layer.borderColor = UIColor.blackColor().CGColor
@@ -67,14 +89,30 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
         return view
     }
 
+    // MARK: - iCarouselDelegate
+
+    func carouselWillBeginDragging(carousel: iCarousel!) {
+        collapseCurrentItemView()
+    }
+
+    func carouselDidEndDragging(carousel: iCarousel!, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            expandCurrentItemView()
+        }
+    }
+
+    func carouselDidEndDecelerating(carousel: iCarousel!) {
+        expandCurrentItemView()
+    }
+
     func carousel(carousel: iCarousel!, valueForOption option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
         switch option {
         case .Wrap:
             return 0
         case .Spacing:
-            return value * 1.1
+            return value * 0.85
         case .Arc:
-            return value * 0.6
+            return value * 0.5
         default:
             return value
         }
