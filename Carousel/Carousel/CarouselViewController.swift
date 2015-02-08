@@ -30,20 +30,28 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
 
     // MARK: - Private
 
-    private func expandCurrentItemView() {
+    private func collapseVisibleItemViews() {
+        for itemView in carousel.visibleItemViews as [UIView] {
+            UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+                itemView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9)
+            }, completion: nil)
+        }
+    }
+
+    private func expandCenterItemView() {
         let currentItemView = carousel.currentItemView
 
-        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
-            let transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1)
-            currentItemView.transform = CGAffineTransformTranslate(transform, 0, -20)
+        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+            currentItemView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.95, 0.95)
         }, completion: nil)
     }
 
-    private func collapseCurrentItemView() {
+    private func expandCurrentItemView() {
         let currentItemView = carousel.currentItemView
 
-        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: { () -> Void in
-            currentItemView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9)
+        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+            let transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1)
+            currentItemView.transform = CGAffineTransformTranslate(transform, 0, -20)
         }, completion: nil)
     }
 
@@ -91,8 +99,13 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
 
     // MARK: - iCarouselDelegate
 
+    func carouselCurrentItemIndexDidChange(carousel: iCarousel!) {
+        collapseVisibleItemViews()
+        expandCenterItemView()
+    }
+
     func carouselWillBeginDragging(carousel: iCarousel!) {
-        collapseCurrentItemView()
+        collapseVisibleItemViews()
     }
 
     func carouselDidEndDragging(carousel: iCarousel!, willDecelerate decelerate: Bool) {
