@@ -17,6 +17,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="6KX-zh-BTP" kind="relationship" relationship="viewControllers" id="VOQ-q9-A05"/>
+                        <segue destination="N0u-6o-em5" kind="relationship" relationship="viewControllers" id="Hmv-Kj-rj4"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5hI-RE-Nfm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -39,7 +40,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdZ-na-cDm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-257" y="12"/>
+            <point key="canvasLocation" x="-267" y="-328"/>
         </scene>
         <!--Swipe View Controller-->
         <scene sceneID="xAJ-QH-XcE">
@@ -77,7 +78,62 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6zd-NA-4ZW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="228" y="12"/>
+            <point key="canvasLocation" x="218" y="-328"/>
+        </scene>
+        <!--iCarousel-->
+        <scene sceneID="XvR-Fp-69F">
+            <objects>
+                <navigationController id="N0u-6o-em5" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="iCarousel" id="hGf-Gx-3m9"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2sp-9Z-6ju">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="SKR-1s-3dW" kind="relationship" relationship="rootViewController" id="Ui0-j8-PfO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zsk-Oq-clt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-267" y="352"/>
+        </scene>
+        <!--Carousel View Controller-->
+        <scene sceneID="ODF-QQ-3Oi">
+            <objects>
+                <viewController id="SKR-1s-3dW" customClass="CarouselViewController" customModule="Paging" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XfA-Ku-Enl"/>
+                        <viewControllerLayoutGuide type="bottom" id="fvP-Ud-Lyt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OCL-bw-MQq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UKR-oc-pWh" customClass="iCarousel">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="SKR-1s-3dW" id="a54-To-mkn"/>
+                                    <outlet property="delegate" destination="SKR-1s-3dW" id="NbI-XR-NQq"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UKR-oc-pWh" firstAttribute="top" secondItem="OCL-bw-MQq" secondAttribute="top" id="0D0-me-Jfd"/>
+                            <constraint firstAttribute="bottom" secondItem="UKR-oc-pWh" secondAttribute="bottom" id="34R-sA-Uxz"/>
+                            <constraint firstItem="UKR-oc-pWh" firstAttribute="leading" secondItem="OCL-bw-MQq" secondAttribute="leading" id="9ED-WH-wxg"/>
+                            <constraint firstAttribute="trailing" secondItem="UKR-oc-pWh" secondAttribute="trailing" id="wXg-zR-KQQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="JUY-uf-M55"/>
+                    <connections>
+                        <outlet property="carousel" destination="UKR-oc-pWh" id="F7X-a1-kuI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RLE-Nl-g7p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="218" y="352"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

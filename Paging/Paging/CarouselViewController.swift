@@ -1,5 +1,5 @@
 //
-//  SwipeViewController.swift
+//  CaroucelViewController.swift
 //  Paging
 //
 //  Created by Jiro Nagashima on 2/15/15.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SwipeViewController: UIViewController, SwipeViewDataSource, SwipeViewDelegate {
+class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDelegate {
 
-    @IBOutlet weak var swipeView : SwipeView!
+    @IBOutlet weak var carousel : iCarousel!
     private var items: [Int] = []
 
     override func awakeFromNib() {
@@ -24,18 +24,18 @@ class SwipeViewController: UIViewController, SwipeViewDataSource, SwipeViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "SwipeView"
+        title = "iCarousel"
 
-        swipeView.wrapEnabled = true
+        carousel.type = .Linear
     }
 
-    // MARK: - SwipeViewDatasource
+    // MARK: - iCarouselDataSource
 
-    func numberOfItemsInSwipeView(swipeView: SwipeView!) -> Int {
+    func numberOfItemsInCarousel(carousel: iCarousel!) -> Int {
         return items.count
     }
 
-    func swipeView(swipeView: SwipeView!, viewForItemAtIndex index: Int, var reusingView view: UIView!) -> UIView! {
+    func carousel(carousel: iCarousel!, viewForItemAtIndex index: Int, var reusingView view: UIView!) -> UIView! {
         var label: UILabel! = nil
 
         //create new view if no view is available for recycling
@@ -43,7 +43,7 @@ class SwipeViewController: UIViewController, SwipeViewDataSource, SwipeViewDeleg
             //don't do anything specific to the index within
             //this `if (view == nil) {...}` statement because the view will be
             //recycled and used with other index values later
-            view = UIView(frame: swipeView.bounds)
+            view = UIView(frame: carousel.bounds)
 
             label = UILabel(frame: view.bounds)
             label.backgroundColor = UIColor.clearColor()
@@ -62,13 +62,18 @@ class SwipeViewController: UIViewController, SwipeViewDataSource, SwipeViewDeleg
         //you'll get weird issues with carousel item content appearing
         //in the wrong place in the carousel
         label.text = "\(items[index])"
-
+        
         return view
     }
 
-    // MARK: - SwipeViewDelegate
+    // MARK: - iCarouselDelegate
 
-    func swipeViewItemSize(swipeView: SwipeView!) -> CGSize {
-        return swipeView.bounds.size
+    func carousel(carousel: iCarousel!, valueForOption option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
+        switch option {
+        case .Wrap:
+            return 1
+        default:
+            return value
+        }
     }
 }
