@@ -26,7 +26,10 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
 
         title = "iCarousel"
 
+        // just like UIScrollView
         carousel.type = .Linear
+        carousel.decelerationRate = 0.6
+        carousel.scrollSpeed = 1.7
     }
 
     // MARK: - iCarouselDataSource
