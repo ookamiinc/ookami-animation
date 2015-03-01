@@ -11,7 +11,9 @@ import UIKit
 class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDelegate {
 
     @IBOutlet weak var carousel : iCarousel!
-    private var items: [Int] = []
+
+    private var items = [Int]()
+    private var contentViewControllerMapTable = NSMapTable.strongToWeakObjectsMapTable()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,6 +34,36 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
         carousel.scrollSpeed = 1.7
     }
 
+    override func shouldAutomaticallyForwardAppearanceMethods() -> Bool {
+        return false
+    }
+
+    // MARK: - Private
+
+    private func dequeueReusableContentViewControllerAtIndex(index: Int) -> ContentViewController {
+        if let contentViewController = contentViewControllerMapTable.objectForKey(index) as? ContentViewController {
+            return contentViewController
+        } else {
+            return ContentViewController()
+        }
+    }
+
+    private func insertContentViewController(contentViewController: ContentViewController, atIndex index: Int) {
+        addChildViewController(contentViewController)
+        contentViewControllerMapTable.setObject(contentViewController, forKey: index)
+    }
+
+    private func removeInvisibleContentViewControllers() {
+        let keyEnumerator = contentViewControllerMapTable.keyEnumerator()
+        while let index: Int = keyEnumerator.nextObject() as? Int {
+            if !contains(carousel.indexesForVisibleItems as [Int], index) {
+                if let contentViewController = contentViewControllerMapTable.objectForKey(index) as? ContentViewController {
+                    contentViewController.removeFromParentViewController()
+                }
+            }
+        }
+    }
+
     // MARK: - iCarouselDataSource
 
     func numberOfItemsInCarousel(carousel: iCarousel!) -> Int {
@@ -39,37 +71,25 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
     }
 
     func carousel(carousel: iCarousel!, viewForItemAtIndex index: Int, var reusingView view: UIView!) -> UIView! {
-        var label: UILabel! = nil
+        view = UIView(frame: carousel.bounds)
 
-        //create new view if no view is available for recycling
-        if (view == nil) {
-            //don't do anything specific to the index within
-            //this `if (view == nil) {...}` statement because the view will be
-            //recycled and used with other index values later
-            view = UIView(frame: carousel.bounds)
+        let contentViewController = dequeueReusableContentViewControllerAtIndex(index)
+        contentViewController.index = items[index]
 
-            label = UILabel(frame: view.bounds)
-            label.backgroundColor = UIColor.clearColor()
-            label.textAlignment = .Center
-            label.font = label.font.fontWithSize(50)
-            label.tag = 1
-            view.addSubview(label)
-        } else {
-            //get a reference to the label in the recycled view
-            label = view.viewWithTag(1) as UILabel!
-        }
+        insertContentViewController(contentViewController, atIndex: index)
 
-        //set item label
-        //remember to always set any properties of your carousel item
-        //views outside of the `if (view == nil) {...}` check otherwise
-        //you'll get weird issues with carousel item content appearing
-        //in the wrong place in the carousel
-        label.text = "\(items[index])"
-        
+        contentViewController.willMoveToParentViewController(self)
+        view.addSubview(contentViewController.view)
+        contentViewController.didMoveToParentViewController(self)
+
         return view
     }
 
     // MARK: - iCarouselDelegate
+
+    func carouselCurrentItemIndexDidChange(carousel: iCarousel!) {
+        removeInvisibleContentViewControllers()
+    }
 
     func carousel(carousel: iCarousel!, valueForOption option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
         switch option {

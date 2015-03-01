@@ -113,8 +113,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="SKR-1s-3dW" id="a54-To-mkn"/>
-                                    <outlet property="delegate" destination="SKR-1s-3dW" id="NbI-XR-NQq"/>
+                                    <outlet property="dataSource" destination="SKR-1s-3dW" id="VdQ-EF-40d"/>
+                                    <outlet property="delegate" destination="SKR-1s-3dW" id="Luz-ce-KS4"/>
                                 </connections>
                             </view>
                         </subviews>
