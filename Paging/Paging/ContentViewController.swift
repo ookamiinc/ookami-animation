@@ -20,16 +20,8 @@ class ContentViewController: UIViewController {
         }
     }
 
-    deinit {
-        if let index = index {
-            println("deinit: \(index)")
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        println("viewDidLoad")
 
         label.frame = view.bounds
         label.backgroundColor = UIColor.clearColor()
@@ -44,6 +36,14 @@ class ContentViewController: UIViewController {
 
         if let index = index {
             println("viewWillAppear: \(index)")
+        }
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if let index = index {
+            println("viewDidAppear: \(index)")
         }
     }
 }
