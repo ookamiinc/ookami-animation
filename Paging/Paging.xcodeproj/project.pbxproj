@@ -16,6 +16,7 @@
 		4B2D16141A908C2D00E2E8F7 /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D16131A908C2C00E2E8F7 /* SwipeViewController.swift */; };
 		4B2D16181A909C8000E2E8F7 /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D16171A909C8000E2E8F7 /* CarouselViewController.swift */; };
 		4B612D1C1A99AAF2007BA2C5 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B612D1B1A99AAF2007BA2C5 /* ContentViewController.swift */; };
+		4B8D11391AABE90200A970AF /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8D11381AABE90200A970AF /* PageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		4B2D16131A908C2C00E2E8F7 /* SwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
 		4B2D16171A909C8000E2E8F7 /* CarouselViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
 		4B612D1B1A99AAF2007BA2C5 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		4B8D11381AABE90200A970AF /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		51E23435A557E65695517704 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		A7587A506FD2C9AFAA1175C7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E212CF1D05E033191F7E91E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				4B0C685B1A90473300983A73 /* AppDelegate.swift */,
 				4B2D16131A908C2C00E2E8F7 /* SwipeViewController.swift */,
 				4B2D16171A909C8000E2E8F7 /* CarouselViewController.swift */,
+				4B8D11381AABE90200A970AF /* PageViewController.swift */,
 				4B612D1B1A99AAF2007BA2C5 /* ContentViewController.swift */,
 				4B0C68611A90473300983A73 /* Main.storyboard */,
 				4B0C68641A90473300983A73 /* Images.xcassets */,
@@ -280,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B612D1C1A99AAF2007BA2C5 /* ContentViewController.swift in Sources */,
+				4B8D11391AABE90200A970AF /* PageViewController.swift in Sources */,
 				4B2D16181A909C8000E2E8F7 /* CarouselViewController.swift in Sources */,
 				4B0C685C1A90473300983A73 /* AppDelegate.swift in Sources */,
 				4B2D16141A908C2D00E2E8F7 /* SwipeViewController.swift in Sources */,

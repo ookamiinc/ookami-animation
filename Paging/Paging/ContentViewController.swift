@@ -16,6 +16,8 @@ class ContentViewController: UIViewController {
         didSet {
             if let index = index {
                 label.text = String(index)
+
+                println("setIndex: \(index)")
             }
         }
     }
