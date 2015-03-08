@@ -10,7 +10,16 @@ import UIKit
 
 class PageViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate {
 
-    let pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+    private let pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+    private var indexes = [Int]()
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        for i in 0...9 {
+            indexes.append(i)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +32,8 @@ class PageViewController: UIViewController, UIPageViewControllerDataSource, UIPa
         pageViewController.delegate = self
 
         let contentViewController = ContentViewController()
-        contentViewController.index = 0
+        contentViewController.index = indexes.first
+
         pageViewController.setViewControllers([contentViewController], direction: .Forward, animated: false, completion: nil)
 
         addChildViewController(pageViewController)
@@ -47,14 +57,24 @@ class PageViewController: UIViewController, UIPageViewControllerDataSource, UIPa
 
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         let contentViewController = ContentViewController()
-        contentViewController.index = 0
+
+        if let viewController = viewController as? ContentViewController {
+            if let index = viewController.index {
+                contentViewController.index = index != 0 ? index - 1 : indexes.last
+            }
+        }
 
         return contentViewController
     }
 
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         let contentViewController = ContentViewController()
-        contentViewController.index = 0
+
+        if let viewController = viewController as? ContentViewController {
+            if let index = viewController.index {
+                contentViewController.index = index != indexes.last ? index + 1 : indexes.first
+            }
+        }
 
         return contentViewController
     }
@@ -62,6 +82,6 @@ class PageViewController: UIViewController, UIPageViewControllerDataSource, UIPa
     // MARK: - Scroll View Delegate
 
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        println(scrollView.contentOffset)
+        // println(scrollView.contentOffset)
     }
 }
