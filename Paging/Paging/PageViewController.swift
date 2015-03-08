@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PageViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class PageViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIScrollViewDelegate {
 
     let pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
 
@@ -16,6 +16,8 @@ class PageViewController: UIViewController, UIPageViewControllerDataSource, UIPa
         super.viewDidLoad()
 
         title = "Page"
+
+        automaticallyAdjustsScrollViewInsets = false
 
         pageViewController.dataSource = self
         pageViewController.delegate = self
@@ -26,10 +28,19 @@ class PageViewController: UIViewController, UIPageViewControllerDataSource, UIPa
 
         addChildViewController(pageViewController)
         view.addSubview(pageViewController.view)
-        pageViewController.view.frame = view.bounds
         pageViewController.didMoveToParentViewController(self)
 
         view.gestureRecognizers = pageViewController.gestureRecognizers
+
+        if let scrollView = pageViewController.view.subviews.first as? UIScrollView {
+            scrollView.delegate = self
+        }
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        pageViewController.view.frame = view.bounds
     }
 
     // MARK: - Page View Controller Data Source
@@ -46,5 +57,11 @@ class PageViewController: UIViewController, UIPageViewControllerDataSource, UIPa
         contentViewController.index = 0
 
         return contentViewController
+    }
+
+    // MARK: - Scroll View Delegate
+
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        println(scrollView.contentOffset)
     }
 }
