@@ -13,6 +13,8 @@
 		4BE3EA0F1AB522AB00DA4495 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BE3EA0E1AB522AB00DA4495 /* Images.xcassets */; };
 		4BE3EA121AB522AB00DA4495 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BE3EA101AB522AB00DA4495 /* LaunchScreen.xib */; };
 		4BE3EA1E1AB522AB00DA4495 /* IntroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3EA1D1AB522AB00DA4495 /* IntroTests.swift */; };
+		4BE3EA281AB545B100DA4495 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4BE3EA271AB545B100DA4495 /* video.mp4 */; };
+		4BE3EA2A1AB5482000DA4495 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3EA291AB5482000DA4495 /* PlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		4BE3EA171AB522AB00DA4495 /* IntroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BE3EA1C1AB522AB00DA4495 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4BE3EA1D1AB522AB00DA4495 /* IntroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroTests.swift; sourceTree = "<group>"; };
+		4BE3EA271AB545B100DA4495 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
+		4BE3EA291AB5482000DA4495 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +83,9 @@
 			children = (
 				4BE3EA071AB522AB00DA4495 /* AppDelegate.swift */,
 				4BE3EA091AB522AB00DA4495 /* ViewController.swift */,
+				4BE3EA291AB5482000DA4495 /* PlayerViewController.swift */,
 				4BE3EA0B1AB522AB00DA4495 /* Main.storyboard */,
+				4BE3EA271AB545B100DA4495 /* video.mp4 */,
 				4BE3EA0E1AB522AB00DA4495 /* Images.xcassets */,
 				4BE3EA101AB522AB00DA4495 /* LaunchScreen.xib */,
 				4BE3EA051AB522AB00DA4495 /* Supporting Files */,
@@ -195,6 +201,7 @@
 				4BE3EA0D1AB522AB00DA4495 /* Main.storyboard in Resources */,
 				4BE3EA121AB522AB00DA4495 /* LaunchScreen.xib in Resources */,
 				4BE3EA0F1AB522AB00DA4495 /* Images.xcassets in Resources */,
+				4BE3EA281AB545B100DA4495 /* video.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +221,7 @@
 			files = (
 				4BE3EA0A1AB522AB00DA4495 /* ViewController.swift in Sources */,
 				4BE3EA081AB522AB00DA4495 /* AppDelegate.swift in Sources */,
+				4BE3EA2A1AB5482000DA4495 /* PlayerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
