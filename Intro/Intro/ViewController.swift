@@ -7,23 +7,21 @@
 //
 
 import UIKit
-import AVKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, PlayerViewControllerDelegate {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    @IBOutlet private weak var pageControl: UIPageControl!
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-
+        if let playerViewController = segue.destinationViewController as? PlayerViewController {
+            playerViewController.delegate = self
+        }
     }
 
+    // MARK: - PlayerViewControllerDelegate
+
+    func playerViewController(viewController: PlayerViewController, indexDidChange index: Int) {
+        pageControl.currentPage = index
+    }
 }
 

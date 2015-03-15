@@ -22,19 +22,30 @@
                                     <segue destination="f1Y-Id-Psk" kind="embed" id="YGA-Uy-tV5"/>
                                 </connections>
                             </containerView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="qmc-uk-eW6">
+                                <rect key="frame" x="121" y="501" width="78" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="78" id="UZ4-Xt-HIB"/>
+                                </constraints>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="qmc-uk-eW6" secondAttribute="bottom" constant="30" id="199-dn-U3S"/>
                             <constraint firstItem="1pr-fU-mvQ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="9Mu-qs-m4a"/>
+                            <constraint firstItem="1pr-fU-mvQ" firstAttribute="centerX" secondItem="qmc-uk-eW6" secondAttribute="centerX" id="JZr-tT-kOn"/>
                             <constraint firstAttribute="trailing" secondItem="1pr-fU-mvQ" secondAttribute="trailing" id="exa-z2-tcg"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="1pr-fU-mvQ" secondAttribute="bottom" id="nQN-cQ-m7v"/>
                             <constraint firstItem="1pr-fU-mvQ" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="tmj-9S-NBO"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="pageControl" destination="qmc-uk-eW6" id="jkr-h4-Bsv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="173.33333333333334" y="280.21333333333331"/>
+            <point key="canvasLocation" x="173" y="280"/>
         </scene>
         <!--AV Player View Controller-->
         <scene sceneID="BjP-tE-4hB">
