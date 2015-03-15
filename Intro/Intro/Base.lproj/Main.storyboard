@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1pr-fU-mvQ">
+                            <containerView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1pr-fU-mvQ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <connections>
                                     <segue destination="f1Y-Id-Psk" kind="embed" id="YGA-Uy-tV5"/>
@@ -30,6 +30,7 @@
                             </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="qmc-uk-eW6" secondAttribute="bottom" constant="30" id="199-dn-U3S"/>
                             <constraint firstItem="1pr-fU-mvQ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="9Mu-qs-m4a"/>
@@ -38,12 +39,26 @@
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="1pr-fU-mvQ" secondAttribute="bottom" id="nQN-cQ-m7v"/>
                             <constraint firstItem="1pr-fU-mvQ" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="tmj-9S-NBO"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="CCR-1P-BeG" appends="YES" id="rq3-lQ-Pa3"/>
+                            <outletCollection property="gestureRecognizers" destination="VyO-o1-IkT" appends="YES" id="TdF-Jf-2M5"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="pageControl" destination="qmc-uk-eW6" id="jkr-h4-Bsv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="VyO-o1-IkT" userLabel="Swipe Gesture Recognizer (Left)">
+                    <connections>
+                        <action selector="swipeToLeft:" destination="vXZ-lx-hvc" id="g92-u0-DVH"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="CCR-1P-BeG" userLabel="Swipe Gesture Recognizer (Right)">
+                    <connections>
+                        <action selector="swipeToRight:" destination="vXZ-lx-hvc" id="NNt-pf-E23"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="173" y="280"/>
         </scene>

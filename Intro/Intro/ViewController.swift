@@ -12,16 +12,34 @@ class ViewController: UIViewController, PlayerViewControllerDelegate {
 
     @IBOutlet private weak var pageControl: UIPageControl!
 
+    private weak var playerViewController: PlayerViewController? {
+        didSet {
+            if let playerViewController = playerViewController {
+                playerViewController.delegate = self
+            }
+        }
+    }
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let playerViewController = segue.destinationViewController as? PlayerViewController {
-            playerViewController.delegate = self
+            self.playerViewController = playerViewController
         }
+    }
+
+    // MARK: - IBActions
+
+    @IBAction func swipeToLeft(sender: UISwipeGestureRecognizer) {
+        playerViewController?.seekToNextScene()
+    }
+
+    @IBAction func swipeToRight(sender: UISwipeGestureRecognizer) {
+        playerViewController?.seekToPreviousScene()
     }
 
     // MARK: - PlayerViewControllerDelegate
 
-    func playerViewController(viewController: PlayerViewController, indexDidChange index: Int) {
-        pageControl.currentPage = index
+    func playerViewController(viewController: PlayerViewController, sceneIndexDidChange sceneIndex: Int) {
+        pageControl.currentPage = sceneIndex
     }
 }
 
