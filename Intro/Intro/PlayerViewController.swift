@@ -20,10 +20,15 @@ class PlayerViewController: AVPlayerViewController {
 
     private let boundaryTimes = [0.0, 3.0, 6.0]
 
+    private var idleTimer: NSTimer?
+    private let idleDuration = 3.0
+
     private var boundaryTimeObserver: AnyObject?
     private var sceneIndex: Int = 0 {
-        didSet {
-            delegate?.playerViewController(self, sceneIndexDidChange: sceneIndex)
+        didSet(oldSceneIndex) {
+            if sceneIndex != oldSceneIndex {
+                delegate?.playerViewController(self, sceneIndexDidChange: sceneIndex)
+            }
         }
     }
 
@@ -40,41 +45,83 @@ class PlayerViewController: AVPlayerViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        boundaryTimeObserver = player.addBoundaryTimeObserverForTimes(boundaryTimes, queue: nil) {
-            let currentTime = round(CMTimeGetSeconds(self.player.currentTime()))
-            if let sceneIndex = find(self.boundaryTimes, currentTime) {
-                self.sceneIndex = sceneIndex
-            }
-        }
+        updateSceneIndex()
+
+        addBoundaryTimeObserver()
     }
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
 
-        player.removeTimeObserver(boundaryTimeObserver)
+        removeBoundaryTimeObserver()
     }
 
     // MARK: - Public
 
     func seekToPreviousScene() {
-        let isFirstScene = (sceneIndex == 0)
-        if isFirstScene {
+        if isFirstScene() {
             return
         }
+
+        removeBoundaryTimeObserver()
 
         let previousBoundaryTime = CMTimeMakeWithSeconds(boundaryTimes[--sceneIndex], Int32(NSEC_PER_SEC))
         player.seekToTime(previousBoundaryTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
         player.play()
+
+        addBoundaryTimeObserver()
     }
 
     func seekToNextScene() {
-        let isLastScene = (sceneIndex == boundaryTimes.count - 1)
-        if isLastScene {
+        if isLastScene() {
             return
         }
+
+        removeBoundaryTimeObserver()
 
         let nextBoundaryTime = CMTimeMakeWithSeconds(boundaryTimes[++sceneIndex], Int32(NSEC_PER_SEC))
         player.seekToTime(nextBoundaryTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
         player.play()
+
+        addBoundaryTimeObserver()
+    }
+
+    // MARK: - Private
+
+    internal func idle() {
+        player.pause()
+    }
+
+    internal func resumeFromIdle() {
+        player.play()
+        updateSceneIndex()
+    }
+
+    private func addBoundaryTimeObserver() {
+        let slicedBoundaryTimes = sceneIndex + 1 < boundaryTimes.count ? Array(boundaryTimes[(sceneIndex + 1)..<boundaryTimes.count]) : [Double]()
+        boundaryTimeObserver = player.addBoundaryTimeObserverForTimes(slicedBoundaryTimes, queue: nil) {
+            self.idle()
+            self.idleTimer = NSTimer.scheduledTimerWithTimeInterval(self.idleDuration, target: self, selector: "resumeFromIdle", userInfo: nil, repeats: false)
+        }
+    }
+
+    private func removeBoundaryTimeObserver() {
+        player.removeTimeObserver(boundaryTimeObserver)
+        idleTimer?.invalidate()
+    }
+
+    private func updateSceneIndex() {
+        let currentTime = round(CMTimeGetSeconds(player.currentTime()))
+        if let sceneIndex = find(boundaryTimes, currentTime) {
+            self.sceneIndex = sceneIndex
+        }
+    }
+
+    private func isFirstScene() -> Bool {
+        return sceneIndex == 0
+    }
+
+    private func isLastScene() -> Bool {
+        return sceneIndex == boundaryTimes.count - 1
     }
 }
