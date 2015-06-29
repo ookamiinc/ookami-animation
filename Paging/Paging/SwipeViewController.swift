@@ -34,8 +34,8 @@ class SwipeViewController: UIViewController, SwipeViewDataSource, SwipeViewDeleg
     func numberOfItemsInSwipeView(swipeView: SwipeView!) -> Int {
         return items.count
     }
-
-    func swipeView(swipeView: SwipeView!, viewForItemAtIndex index: Int, var reusingView view: UIView!) -> UIView! {
+    
+    func swipeView(swipeView: SwipeView!, viewForItemAtIndex index: Int, reusingView view: UIView!) -> UIView! {
         var label: UILabel! = nil
 
         //create new view if no view is available for recycling
@@ -43,26 +43,20 @@ class SwipeViewController: UIViewController, SwipeViewDataSource, SwipeViewDeleg
             //don't do anything specific to the index within
             //this `if (view == nil) {...}` statement because the view will be
             //recycled and used with other index values later
-            view = UIView(frame: swipeView.bounds)
+            let v = UIView(frame: swipeView.bounds)
 
-            label = UILabel(frame: view.bounds)
+            label = UILabel(frame: v.bounds)
             label.backgroundColor = UIColor.clearColor()
             label.textAlignment = .Center
             label.font = label.font.fontWithSize(50)
             label.tag = 1
-            view.addSubview(label)
-        } else {
-            //get a reference to the label in the recycled view
-            label = view.viewWithTag(1) as UILabel!
+            label.text = "\(items[index])"
+            v.addSubview(label)
+            return v
         }
-
-        //set item label
-        //remember to always set any properties of your carousel item
-        //views outside of the `if (view == nil) {...}` check otherwise
-        //you'll get weird issues with carousel item content appearing
-        //in the wrong place in the carousel
+        //get a reference to the label in the recycled view
+        label = view.viewWithTag(1) as! UILabel!
         label.text = "\(items[index])"
-
         return view
     }
 

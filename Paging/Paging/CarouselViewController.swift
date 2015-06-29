@@ -76,7 +76,7 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
     private func removeInvisibleContentViewControllers() {
         let keyEnumerator = contentViewControllerMapTable.keyEnumerator()
         while let index: Int = keyEnumerator.nextObject() as? Int {
-            if !contains(carousel.indexesForVisibleItems as [Int], index) {
+            if !contains(carousel.indexesForVisibleItems as! [Int], index) {
                 if let contentViewController = contentViewControllerMapTable.objectForKey(index) as? ContentViewController {
                     contentViewController.removeFromParentViewController()
                 }
@@ -110,8 +110,8 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
         return items.count
     }
 
-    func carousel(carousel: iCarousel!, viewForItemAtIndex index: Int, var reusingView view: UIView!) -> UIView! {
-        view = UIView(frame: carousel.bounds)
+    func carousel(carousel: iCarousel!, viewForItemAtIndex index: Int, reusingView view: UIView!) -> UIView! {
+        let view = UIView(frame: carousel.bounds)
 
         let contentViewController = dequeueReusableContentViewControllerAtIndex(index)
         contentViewController.index = items[index]
@@ -134,6 +134,7 @@ class CarouselViewController: UIViewController, iCarouselDataSource, iCarouselDe
         isAppearanceTransitioning = false
     }
 
+    
     func carouselDidScroll(carousel: iCarousel!) {
         if !isAppearanceTransitioning {
             let (sourceIndex, destinationIndex) = sourceIndexAndDestinationIndex()
